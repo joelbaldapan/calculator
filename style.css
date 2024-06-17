@@ -8,6 +8,7 @@
 
   --button-gray: #323232;
   --button-lightgray: #929292;
+  --button-accent: #3e10b3;
 
   --font-main: "Helvetica", serif;
 }
@@ -20,7 +21,7 @@
 
 html,
 body {
-  height: 100%;
+  width: 100%;
   background: var(--w-background);
   color: var(--w-text);
   font-family: var(--font-main);
@@ -31,6 +32,22 @@ body {
   flex-direction: column;
 }
 
+header {
+  width: 100%;
+  height: 50px;
+  background-color: #323232;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+footer {
+  width: 100%;
+  height: 50px;
+  background-color: #323232;
+  margin-top: 50px;
+  text-align: center;
+}
+
 .logo {
   width: 20vw;
   padding: 1vw;
@@ -39,24 +56,18 @@ body {
   bottom: 1%;
 }
 
-@media (max-width: 950px) {
-  .logo {
-    width: 12rem;
-  }
-}
-
 #calculator {
-  height: 50rem;
-  width: 25rem;
+  height: 600px;
+  width: 300px;
   background-color: #03010b;
-  border: 0.5rem solid #c9c9c9;
-  border-radius: 5rem;
+  border: 6px solid #c9c9c9;
+  border-radius: 50px;
 
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 3.5fr repeat(5, 1fr);
-  gap: 0.5rem;
-  padding: 1.5rem;
+  gap: 5px;
+  padding: 15px;
   place-content: center;
 }
 
@@ -66,17 +77,31 @@ body {
 
 #zero {
   grid-column: 1 / 3;
-  width: 10rem;
-  border-radius: 20rem;
+  width: 125px;
+  border-radius: 200px;
 }
 
 button {
   border-radius: 50%;
-  height: 5rem;
-  width: 5rem;
+  height: 60px;
+  width: 60px;
   background-color: var(--button-gray);
   border: 0 solid black;
   color: white;
   font-family: var(--font-main);
-  font-size: 2rem;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(0.7);
+}
+
+.operator {
+  background-color: var(--button-accent);
+}
+
+.top {
+  background-color: var(--button-lightgray);
+  color: var(--button-gray);
 }
