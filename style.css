@@ -80,16 +80,26 @@ footer {
 }
 
 #display-current {
+  z-index: 1;
   position: relative;
-  top: 80%;
+  top: 65%;
   font-size: 45px;
 }
 
 #display-previous {
   position: absolute;
-  top: 40%;
+  top: 20%;
   right: 0%;
   font-size: 35px;
+}
+
+#btn-backspace {
+  position: absolute;
+  top: 78%;
+  right: 0%;
+  font-size: 20px;
+  background-color: #03010b;
+  z-index: 0;
 }
 
 #zero {
@@ -99,6 +109,7 @@ footer {
 }
 
 button {
+  z-index: 1;
   border-radius: 50%;
   height: 60px;
   width: 60px;

@@ -4,6 +4,7 @@ const specialBtns = [...document.getElementsByClassName("btn-special")];
 const displayCurrent = document.getElementById("display-current");
 const displayPrevious = document.getElementById("display-previous");
 const clearBtn = document.getElementById("btn-clear");
+const sound = document.getElementById("sfx");
 
 // Code
 const operation = {
@@ -39,6 +40,7 @@ function operate(firstNumber, operator, secondNumber) {
   if (operator === "+/-") return operation.sign(firstNumber);
   if (operator === "AC") return resetDisplay();
   if (operator === "C") return resetDisplay();
+  if (operator === "⌦") return firstNumber.slice(1);
   if (operator === "=") return secondNumber;
 }
 
@@ -51,6 +53,7 @@ let previousOperator = "+";
 let displayNumber;
 
 function resetDisplay() {
+  playResetSFX();
   displayNumber = 0;
   currNumber = "";
   operator = "+";
@@ -92,7 +95,7 @@ function formatNumber(number) {
   // Add comma every 3 places
   let numberArray = Array.from(integerPart).reverse();
   for (let i = 3; i < numberArray.length; i += 4) {
-    numberArray.splice(i, 0, ",");
+    if (numberArray[i] !== "-") numberArray.splice(i, 0, ",");
   }
 
   // Finalize results
@@ -126,6 +129,7 @@ numberBtns.forEach((button) => {
 
     // Display number
     clearBtn.textContent = "C";
+    playBtnSFX();
     updateCurrentDisplay(currNumber);
   });
 });
@@ -146,6 +150,7 @@ operatorBtns.forEach((button) => {
     previousOperator = currentOperator;
     prevNumber = currNumber;
 
+    playBtnSFX();
     updateCurrentDisplay(operatedNumber);
     updatePreviousDisplay(previousOperator);
 
@@ -163,6 +168,8 @@ operatorBtns.forEach((button) => {
 // Special Keys
 specialBtns.forEach((button) => {
   button.addEventListener("click", () => {
+    playBtnSFX();
+    console.log(operatedNumber, currNumber);
     if (operatedNumber == undefined) operatedNumber = currNumber;
     else currNumber = operatedNumber;
 
@@ -173,3 +180,19 @@ specialBtns.forEach((button) => {
   });
 });
 
+function getRandomNumber() {
+  return Math.floor(Math.random() * 3) + 1;
+}
+
+function playBtnSFX() {
+  let randomNumber = getRandomNumber();
+  const sound = new Audio();
+  sound.src = `audio/btn-${randomNumber}.mp3`;
+  sound.play();
+}
+
+function playResetSFX() {
+  const sound = new Audio();
+  sound.src = `audio/reset.mp3`;
+  sound.play();
+}
