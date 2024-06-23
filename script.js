@@ -31,17 +31,27 @@ const operation = {
 };
 
 function operate(firstNumber, operator, secondNumber) {
-  if (operator === "+") return operation.add(firstNumber, secondNumber);
-  if (operator === "–") return operation.subtract(firstNumber, secondNumber);
-  if (operator === "×") return operation.multiply(firstNumber, secondNumber);
-  if (operator === "÷") return operation.divide(firstNumber, secondNumber);
+  let result;
 
-  if (operator === "%") return operation.percent(firstNumber);
-  if (operator === "+/-") return operation.sign(firstNumber);
+  if (operator === "+") result = operation.add(firstNumber, secondNumber);
+  if (operator === "–") result = operation.subtract(firstNumber, secondNumber);
+  if (operator === "×") result = operation.multiply(firstNumber, secondNumber);
+  if (operator === "÷") result = operation.divide(firstNumber, secondNumber);
+
+  if (operator === "%") result = operation.percent(firstNumber);
+  if (operator === "+/-") result = operation.sign(firstNumber);
+  if (operator === "⌦") return firstNumber.slice(1);
   if (operator === "AC") return resetDisplay();
   if (operator === "C") return resetDisplay();
-  if (operator === "⌦") return firstNumber.slice(1);
   if (operator === "=") return secondNumber;
+
+  result = roundNumber(result, 5);
+  return result;
+}
+
+function roundNumber(number, round) {
+  const factor = Math.pow(10, round);
+  return Math.round(number * factor) / factor;
 }
 
 let currNumber = "";
@@ -126,7 +136,12 @@ numberBtns.forEach((button) => {
       else currNumber += ".";
     } else {
       // Don't append more numbers if zero
-      if (button.textContent === "0" && currNumber === "") return;
+      if (
+        button.textContent === "0" &&
+        currNumber === "" &&
+        previousOperator !== "×"
+      )
+        return;
       currNumber += button.textContent;
     }
 
@@ -147,7 +162,9 @@ operatorBtns.forEach((button) => {
     if (previousOperator !== "=") {
       currNumber = parseFloat(currNumber);
       console.log(prevNumber, previousOperator, currNumber);
-      operatedNumber = operate(prevNumber, previousOperator, currNumber);
+      if (!isNaN(currNumber))
+        operatedNumber = operate(prevNumber, previousOperator, currNumber);
+      else currNumber = 0;
     }
 
     // User presses operator buttons
