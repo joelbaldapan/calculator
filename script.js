@@ -49,6 +49,7 @@ let operator = "+";
 let prevNumber = 0;
 
 let operatedNumber = undefined;
+let specialNumber;
 let previousOperator = "+";
 let displayNumber;
 
@@ -81,8 +82,10 @@ function updatePreviousDisplay(operation) {
 }
 
 function formatNumber(number) {
-  number = number.toString();
-  let [integerPart, decimalPart] = number.split(".");
+  number = parseFloat(number); // Convert to a floating-point number
+
+  let numberStr = number.toString(); // Convert back to string for processing
+  let [integerPart, decimalPart] = numberStr.split(".");
 
   // Convert to scientific notation if the integer part or the decimal part is too long
   if (
@@ -100,7 +103,7 @@ function formatNumber(number) {
 
   // Finalize results
   let result = numberArray.reverse().join("");
-  if (number.includes(".")) result += "." + decimalPart;
+  if (numberStr.includes(".")) result += "." + decimalPart;
   return result;
 }
 
@@ -128,6 +131,7 @@ numberBtns.forEach((button) => {
     }
 
     // Display number
+    specialNumber = currNumber;
     clearBtn.textContent = "C";
     playBtnSFX();
     updateCurrentDisplay(currNumber);
@@ -150,6 +154,7 @@ operatorBtns.forEach((button) => {
     previousOperator = currentOperator;
     prevNumber = currNumber;
 
+    specialNumber = operatedNumber;
     playBtnSFX();
     updateCurrentDisplay(operatedNumber);
     updatePreviousDisplay(previousOperator);
@@ -169,14 +174,12 @@ operatorBtns.forEach((button) => {
 specialBtns.forEach((button) => {
   button.addEventListener("click", () => {
     playBtnSFX();
-    console.log(operatedNumber, currNumber);
-    if (operatedNumber == undefined) operatedNumber = currNumber;
-    else currNumber = operatedNumber;
 
-    operatedNumber = operate(operatedNumber, button.textContent).toString();
-    currNumber = operatedNumber;
+    console.table(specialNumber, currNumber);
+    specialNumber = operate(specialNumber, button.textContent).toString();
+    currNumber = specialNumber;
 
-    updateCurrentDisplay(operatedNumber);
+    updateCurrentDisplay(specialNumber);
   });
 });
 
