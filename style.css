@@ -73,6 +73,10 @@ footer {
 
 #display {
   grid-column: 1 / 5;
+  align-self: end;
+  text-align: right;
+  font-size: 45px;
+  padding-bottom: 10px;
 }
 
 #zero {
