@@ -3,6 +3,7 @@
   --w-pri-light: #5400fd;
   --w-sec: #da3fa9;
   --w-accent: #d5cc17;
+  --w-dark: #14065f;
   --w-background: #040115;
   --w-text: #cddbec;
 
@@ -11,6 +12,7 @@
   --button-accent: #3e10b3;
 
   --font-main: "Helvetica", serif;
+  --font-w-main: "Zilla Slab", serif;
 }
 
 * {
@@ -34,29 +36,60 @@ body {
 
 header {
   width: 100%;
-  height: 50px;
-  background-color: #323232;
+  height: 20rem;
+  background-color: var(--w-pri-dark);
   margin-bottom: 50px;
   text-align: center;
+  font-family: var(--font-w-main);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h1 {
+  font-size: 5rem;
 }
 
 footer {
   width: 100%;
-  height: 50px;
-  background-color: #323232;
+  height: 20rem;
+  background-color: var(--w-pri-dark);
   margin-top: 50px;
   text-align: center;
+  font-family: var(--font-w-main);
 }
 
-.logo {
-  width: 20vw;
+#logo {
+  width: 20rem;
   padding: 1vw;
-  position: fixed;
-  left: 1%;
-  bottom: 1%;
+}
+#github {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#github-logo {
+  width: 2rem;
+}
+
+a {
+  display: inline;
+  font-family: var(--font-w-main);
+  font-weight: 400;
+  font-size: min(8vw, 2rem);
+  text-align: center;
+  color: var(--w-text);
+  padding: 0 0.5rem;
+}
+
+a:hover {
+  color: var(--w-accent);
 }
 
 #calculator {
+  margin: 50px;
   height: 600px;
   width: 300px;
   background-color: #03010b;
@@ -69,6 +102,10 @@ footer {
   gap: 5px;
   padding: 15px;
   place-content: center;
+}
+
+p {
+  font-size: 2rem;
 }
 
 #display {
@@ -88,7 +125,7 @@ footer {
 
 #display-previous {
   position: absolute;
-  top: 20%;
+  top: 30%;
   right: 0%;
   font-size: 35px;
 }
