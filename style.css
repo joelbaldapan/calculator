@@ -72,11 +72,24 @@ footer {
 }
 
 #display {
+  height: 100%;
   grid-column: 1 / 5;
-  align-self: end;
   text-align: right;
-  font-size: 45px;
   padding-bottom: 10px;
+  position: relative;
+}
+
+#display-current {
+  position: relative;
+  top: 80%;
+  font-size: 45px;
+}
+
+#display-previous {
+  position: absolute;
+  top: 40%;
+  right: 0%;
+  font-size: 35px;
 }
 
 #zero {

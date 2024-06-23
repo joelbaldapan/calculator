@@ -1,6 +1,6 @@
 const numberBtns = [...document.getElementsByClassName("btn-number")];
 const operatorBtns = [...document.getElementsByClassName("btn-operator")];
-const display = document.getElementById("display");
+const display = document.getElementById("display-current");
 
 // Code
 const operation = {
